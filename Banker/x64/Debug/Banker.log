@@ -1,0 +1,10 @@
+﻿  Main.cpp
+Q:\WordSpace\learnC\Banker\Banker\mywindow.h(224,14): warning C4267: 'argument': conversion from 'size_t' to 'short', possible loss of data
+Q:\WordSpace\learnC\Banker\Banker\mywindow.h(319,14): warning C4267: 'argument': conversion from 'size_t' to 'short', possible loss of data
+Q:\WordSpace\learnC\Banker\Banker\Main.cpp(116,17): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+Q:\WordSpace\learnC\Banker\Banker\Main.cpp(117,22): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+Q:\WordSpace\learnC\Banker\Banker\Main.cpp(181,13): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+Q:\WordSpace\learnC\Banker\Banker\Main.cpp(343,22): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+Q:\WordSpace\learnC\Banker\Banker\Main.cpp(378,33): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+Q:\WordSpace\learnC\Banker\Banker\Main.cpp(403,32): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+  Banker.vcxproj -> Q:\WordSpace\learnC\Banker\x64\Debug\Banker.exe
