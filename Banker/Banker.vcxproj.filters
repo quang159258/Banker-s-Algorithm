@@ -23,5 +23,8 @@
     <ClInclude Include="mywindow.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Banker.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

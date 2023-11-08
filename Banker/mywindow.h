@@ -3,7 +3,6 @@
 #include <string>
 #include "windows.h"
 #include <iostream>
-#include<vector>
 using namespace std;
 //======= lấy tọa độ x của con trỏ hiện tại =============
 #define KEY_NONE -1
