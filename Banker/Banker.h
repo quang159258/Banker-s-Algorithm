@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include"mywindow.h"
 #define v std::vector
 #define pause system("pause")
@@ -231,7 +231,7 @@ public:
 		}
 		return false;
 	}
-	int Resource_Allocation(int id, v<int>Request)
+	int Resource_Request(int id, v<int>Request)
 	{
 		v<int>List;
 		int Finish;
@@ -345,103 +345,103 @@ public:
 				Need = Request;
 			else return;
 		}
-		for (int i = 0; i < number_request; i++)
+		for (int i = 0; i < number_request; i++) // Nếu có Request sẵn nxm thì add thêm id vào thành nx(m+1)
 		{
 			id.push_back(i);
 			Request[i].push_back(i);
 		}
-	loop:
-		int flag_Event = false;
-		tmp = 0;
-		std::cout << "Nhan Enter de nhap trong vong 5 giay !!" << std::endl;
-		for (int i = 0; i < 5; i++)
+		while (!Is_AllProcess_Finish(Finish))// Hoàn thành tất cả tiến trình
 		{
-			std::this_thread::sleep_for(std::chrono::seconds(1));
-
-			if (_kbhit())
+			int flag_Event = false;
+			tmp = 0;
+			std::cout << "Nhan Enter de nhap trong vong 2 giay !!" << std::endl;
+			for (int i = 0; i < 2; i++)
 			{
-				key = _getch();
-				if (key == 13)
+				std::this_thread::sleep_for(std::chrono::seconds(1));
+
+				if (_kbhit())
 				{
-					flag_Event = true;
+					key = _getch();
+					if (key == 13)
+					{
+						flag_Event = true;
+						break;
+					}
+				}
+			}
+			if (flag_Event) // Nếu có Enter thì nhập request ( gồm id ) vào thêm vào vị trí cuối
+			{
+				Nhap_Request(id, Finish);
+				number_request = Request.size();
+			}
+			for (int i = 0; i < Request.size(); i++)
+			{
+				int result = Resource_Request(id[i], Request[i]); // kiểm tra xem request được nhận không
+				if (result == 1)//chấp nhận - đã cập nhật
+				{
+					std::cout << "\t\tRequest cua Process " << id[i] << " duoc phep\n";
+					id.erase(id.begin() + i);
+					Request.erase(Request.begin() + i);
+					i--;
+				}
+				else if (result == -1) // từ chối
+				{
+					std::cout << "\t\tRequest cua Process " << id[i] << " se gay deadlock\n";
+					std::cout << "\t\tTien hanh block Request cua " << "Process " << id[i] << "\n";
+					id.erase(id.begin() + i);
+					Request.erase(Request.begin() + i);
+					i--;
+				}
+				else //request sẽ chờ
+				{
+					std::cout << "\t\tRequest cua Process " << id[i] << " dang cho\n";
+				}
+			}
+			number_request = Request.size();
+
+
+			Banker class_check(Number_UnFinish(Finish), m, Avail, Allocation, Max, Request, Need);//Tạo một class con để check các Tiến trình chưa chạy xong
+			if (!Request.empty())
+				for (int i = 0; i < n; i++)
+				{
+					if (!Finish[i])
+					{
+						class_check.Allocation[tmp] = Allocation[i];
+						class_check.Max[tmp] = Max[i];
+						int k = Find_Index_Of_Id(i, Request);//Dò tìm index của Request chứa Request của Tiến trình i
+						if (k != -1)
+							class_check.Request[tmp] = Request[k];
+						class_check.Need[tmp] = Need[i];
+						tmp++;
+					}
+
+				}
+			if (!class_check.Safety(List_tmp)) //Nếu Unsafe thì có deadlock, ngừng chạy
+			{
+				std::cout << "Da xay ra DEADLOCK\n";
+				_getch();
+				return;
+			}
+
+
+
+			for (int i = 0; i < n; i++)//Thuật toán Safety
+			{
+				if (Finish[i])
+				{
+					continue;
+				}
+				if (Is_A_Smaller_Equal_B(i, Need, Avail))
+				{
+					std::cout << "\tProcess " << i << " dang chay\n";
+					List.push_back(i);
+					Plus_Two_Vector(Avail, Allocation[i]);
+					Finish[i] = true;
+					std::cout << "\tProcess " << i << " da xong\n";
 					break;
 				}
 			}
 		}
-		if (flag_Event)
-		{
-			Nhap_Request(id, Finish);
-			number_request = Request.size();
-		}
-		for (int i = 0; i < Request.size(); i++)
-		{
-			int result = Resource_Allocation(id[i], Request[i]);
-			if (result == 1)
-			{
-				std::cout << "\t\tRequest cua Process " << id[i] << " duoc phep\n";
-				id.erase(id.begin() + i);
-				Request.erase(Request.begin() + i);
-				i = -1;
-			}
-			else if (result == -1)
-			{
-				std::cout << "\t\tRequest cua Process " << id[i] << " se gay deadlock\n";
-				std::cout << "\t\tTien hanh block Request cua " << "Process " << id[i] << "\n";
-				id.erase(id.begin() + i);
-				Request.erase(Request.begin() + i);
-				i = -1;
-			}
-			else
-			{
-				std::cout << "\t\tRequest cua Process " << id[i] << " dang cho\n";
-			}
-		}
-		number_request = Request.size();
-
-
-		Banker class_check(Number_UnFinish(Finish), m, Avail, Allocation, Max, Request, Need);
-		if (!Request.empty())
-			for (int i = 0; i < n; i++)
-			{
-				if (!Finish[i])
-				{
-					class_check.Allocation[tmp] = Allocation[i];
-					class_check.Max[tmp] = Max[i];
-					int k = Find_Index_Of_Id(i, Request);
-					if (k != -1)
-						class_check.Request[tmp] = Request[k];
-					class_check.Need[tmp] = Need[i];
-					tmp++;
-				}
-
-			}
-		if (!class_check.Safety(List_tmp))
-		{
-			std::cout << "Da xay ra DEADLOCK\n";
-			_getch();
-			return;
-		}
-
-
-
-		for (int i = 0; i < n; i++)
-		{
-			if (Finish[i])
-			{
-				continue;
-			}
-			if (Is_A_Smaller_Equal_B(i, Need, Avail))
-			{
-				std::cout << "\tProcess " << i << " dang chay\n";
-				List.push_back(i);
-				Plus_Two_Vector(Avail, Allocation[i]);
-				Finish[i] = true;
-				std::cout << "\tProcess " << i << " da xong\n";
-				break;
-			}
-		}
-		if (!Is_AllProcess_Finish(Finish))
-			goto loop;
 		Print_String_Of_Safety(List);
 	}
 };

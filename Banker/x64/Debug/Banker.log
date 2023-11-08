@@ -5,6 +5,6 @@ Q:\WordSpace\learnC\Banker\Banker\Banker.h(112,17): warning C4267: 'initializing
 Q:\WordSpace\learnC\Banker\Banker\Banker.h(113,22): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
 Q:\WordSpace\learnC\Banker\Banker\Banker.h(177,13): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
 Q:\WordSpace\learnC\Banker\Banker\Banker.h(339,22): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-Q:\WordSpace\learnC\Banker\Banker\Banker.h(374,33): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-Q:\WordSpace\learnC\Banker\Banker\Banker.h(399,32): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+Q:\WordSpace\learnC\Banker\Banker\Banker.h(375,34): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+Q:\WordSpace\learnC\Banker\Banker\Banker.h(400,33): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
   Banker.vcxproj -> Q:\WordSpace\learnC\Banker\x64\Debug\Banker.exe
