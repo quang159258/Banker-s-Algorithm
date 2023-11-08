@@ -1,10 +1,18 @@
 ﻿  Main.cpp
-Q:\WordSpace\learnC\Banker\Banker\mywindow.h(223,14): warning C4267: 'argument': conversion from 'size_t' to 'short', possible loss of data
-Q:\WordSpace\learnC\Banker\Banker\mywindow.h(318,14): warning C4267: 'argument': conversion from 'size_t' to 'short', possible loss of data
-Q:\WordSpace\learnC\Banker\Banker\Banker.h(112,17): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-Q:\WordSpace\learnC\Banker\Banker\Banker.h(113,22): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-Q:\WordSpace\learnC\Banker\Banker\Banker.h(177,13): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-Q:\WordSpace\learnC\Banker\Banker\Banker.h(339,22): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-Q:\WordSpace\learnC\Banker\Banker\Banker.h(375,34): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-Q:\WordSpace\learnC\Banker\Banker\Banker.h(400,33): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-  Banker.vcxproj -> Q:\WordSpace\learnC\Banker\x64\Debug\Banker.exe
+Main.obj : error LNK2019: unresolved external symbol "__declspec(dllimport) public: __cdecl sf::String::String(char const *,class std::locale const &)" (__imp_??0String@sf@@QEAA@PEBDAEBVlocale@std@@@Z) referenced in function main
+Main.obj : error LNK2019: unresolved external symbol "__declspec(dllimport) public: __cdecl sf::String::~String(void)" (__imp_??1String@sf@@QEAA@XZ) referenced in function main
+Main.obj : error LNK2019: unresolved external symbol "__declspec(dllimport) public: __cdecl sf::VideoMode::VideoMode(unsigned int,unsigned int,unsigned int)" (__imp_??0VideoMode@sf@@QEAA@III@Z) referenced in function main
+Main.obj : error LNK2019: unresolved external symbol "__declspec(dllimport) public: bool __cdecl sf::WindowBase::isOpen(void)const " (__imp_?isOpen@WindowBase@sf@@QEBA_NXZ) referenced in function main
+Main.obj : error LNK2019: unresolved external symbol "__declspec(dllimport) public: bool __cdecl sf::WindowBase::pollEvent(class sf::Event &)" (__imp_?pollEvent@WindowBase@sf@@QEAA_NAEAVEvent@2@@Z) referenced in function main
+Main.obj : error LNK2019: unresolved external symbol "__declspec(dllimport) public: virtual void __cdecl sf::Window::close(void)" (__imp_?close@Window@sf@@UEAAXXZ) referenced in function main
+Main.obj : error LNK2019: unresolved external symbol "__declspec(dllimport) public: void __cdecl sf::Window::display(void)" (__imp_?display@Window@sf@@QEAAXXZ) referenced in function main
+Main.obj : error LNK2019: unresolved external symbol "__declspec(dllimport) public: void __cdecl sf::RenderTarget::clear(class sf::Color const &)" (__imp_?clear@RenderTarget@sf@@QEAAXAEBVColor@2@@Z) referenced in function main
+Main.obj : error LNK2019: unresolved external symbol "__declspec(dllimport) public: __cdecl sf::RenderWindow::RenderWindow(class sf::VideoMode,class sf::String const &,unsigned int,struct sf::ContextSettings const &)" (__imp_??0RenderWindow@sf@@QEAA@VVideoMode@1@AEBVString@1@IAEBUContextSettings@1@@Z) referenced in function main
+Main.obj : error LNK2019: unresolved external symbol "__declspec(dllimport) public: virtual __cdecl sf::RenderWindow::~RenderWindow(void)" (__imp_??1RenderWindow@sf@@UEAA@XZ) referenced in function main
+Main.obj : error LNK2019: unresolved external symbol "__declspec(dllimport) public: static class sf::Color const sf::Color::Black" (__imp_?Black@Color@sf@@2V12@B) referenced in function main
+Q:\WordSpace\learnC\Banker\SFML\lib\sfml-system-d.lib : warning LNK4272: library machine type 'x86' conflicts with target machine type 'x64'
+Q:\WordSpace\learnC\Banker\SFML\lib\sfml-graphics-d.lib : warning LNK4272: library machine type 'x86' conflicts with target machine type 'x64'
+Q:\WordSpace\learnC\Banker\SFML\lib\sfml-audio-d.lib : warning LNK4272: library machine type 'x86' conflicts with target machine type 'x64'
+Q:\WordSpace\learnC\Banker\SFML\lib\sfml-window-d.lib : warning LNK4272: library machine type 'x86' conflicts with target machine type 'x64'
+Q:\WordSpace\learnC\Banker\SFML\lib\sfml-network-d.lib : warning LNK4272: library machine type 'x86' conflicts with target machine type 'x64'
+Q:\WordSpace\learnC\Banker\x64\Debug\Banker.exe : fatal error LNK1120: 11 unresolved externals
