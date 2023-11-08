@@ -1,1 +1,8 @@
-﻿  Banker.vcxproj -> Q:\WordSpace\learnC\Banker\Debug\Banker.exe
+﻿  Main.cpp
+Q:\WordSpace\learnC\Banker\Banker\mywindow.h(223,14): warning C4267: 'argument': conversion from 'size_t' to 'short', possible loss of data
+Q:\WordSpace\learnC\Banker\Banker\mywindow.h(318,14): warning C4267: 'argument': conversion from 'size_t' to 'short', possible loss of data
+Q:\WordSpace\learnC\Banker\Banker\Banker.h(268,21): warning C4018: '<': signed/unsigned mismatch
+Q:\WordSpace\learnC\Banker\Banker\Banker.h(317,21): warning C4018: '<': signed/unsigned mismatch
+Q:\WordSpace\learnC\Banker\Banker\Banker.h(325,21): warning C4018: '<': signed/unsigned mismatch
+Q:\WordSpace\learnC\Banker\Banker\Banker.h(377,22): warning C4018: '<': signed/unsigned mismatch
+  Banker.vcxproj -> Q:\WordSpace\learnC\Banker\Debug\Banker.exe
