@@ -441,7 +441,13 @@ public:
 					List.push_back(i);
 					Plus_Two_Vector(Avail, Allocation[i]);
 					Finish[i] = true;
+					Allocation[i] = v<int>(m, 0);
 					std::cout << "\tProcess " << i << " da xong\n";
+					std::cout << "Avail\n";
+					Print(Avail, m);
+					std::cout << "Allocation\n";
+					Print(Allocation, n,m);
+					_getch();
 					break;
 				}
 			}
@@ -451,5 +457,23 @@ public:
 	void Readfile(string a)
 	{
 
+	}
+	void Print(v<v<int>>a,int n,int m)
+	{
+		for (int i = 0; i < n; i++)
+		{
+			for (int j = 0; j < m; j++)
+				std::cout << a[i][j] << " ";
+			std::cout << "\n";
+		}
+	}
+	void Print(v<int>a, int n)
+	{
+		for (int i = 0; i < n; i++)
+		{
+				std::cout << a[i] << " ";
+			
+		}
+		std::cout << "\n";
 	}
 };

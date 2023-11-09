@@ -5,7 +5,8 @@
 #include<thread>
 #include"mywindow.h"
 #include"Banker.h"
-
+#include"SFML/Window.hpp"
+#include"UI.h"
 #define v std::vector
 #define pause system("pause")
 #define cls system("cls")
@@ -25,5 +26,6 @@ int main()
 	Banker m = Banker(4, 4, Avail, Allocation, Max, Request, Need);
 	m.AddRequest();
 	pause;
+	
 	return 0;
 }
