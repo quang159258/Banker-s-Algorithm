@@ -3,6 +3,10 @@
 #include <string>
 #include "windows.h"
 #include <iostream>
+
+#define v std::vector
+#define pause system("pause")
+#define cls system("cls")
 using namespace std;
 //======= lấy tọa độ x của con trỏ hiện tại =============
 #define KEY_NONE -1
@@ -262,9 +266,61 @@ void n_Box_divide(int x, int y, int w, int h, int b_color, string nd[], int sl) 
     }
 }
 
+
 void n_Box_divide_E(int x, int y, int w, int h, int b_color, string nd[], int sl) {
     for (int i = 0; i < sl; i++) {
         Box_E(x, y + (i * h), w, h, b_color, nd[i]); // i = 0 => x,y, i = 1: x,y+2
+        if (i != 0) {
+            gotoXY(x, y + (i * h));
+            cout << char(195);
+            gotoXY(x + w, y + (i * h));
+            cout << char(180);
+        }
+    }
+}
+void Box(int x, int y, int w, int h, int b_color, v<int>Request,int m) {
+    gotoXY(x, y);
+    textcolor(b_color);
+    for (int iy = y + 1; iy <= y + h - 1; iy++) {
+        for (int ix = x + 1; ix <= x + w - 1; ix++) {
+            gotoXY(ix, iy);
+            cout << " ";
+        }
+    }
+    textcolor(b_color);
+    gotoXY(x + 1, y + 1);
+    cout << Request[m];
+
+    // Ve vien
+    textcolor(b_color);
+    if (h <= 1 || w <= 1)
+        return;
+    for (int ix = x; ix <= x + w; ix++) {
+        gotoXY(ix, y);
+        cout << char(196);
+        gotoXY(ix, y + h);
+        cout << char(196);
+    }
+    for (int iy = y; iy <= y + h; iy++) {
+        gotoXY(x, iy);
+        cout << char(179);
+        gotoXY(x + w, iy);
+        cout << char(179);
+    }
+    // Ve 4 goc
+    gotoXY(x, y);
+    cout << char(218);
+    gotoXY(x + w, y);
+    cout << char(191);
+    gotoXY(x, y + h);
+    cout << char(192);
+    gotoXY(x + w, y + h);
+    cout << char(217);
+}
+void n_Box_divide_E(int x, int y, int w, int h, int b_color, v<v<int>>Request,int m) {
+    int sl = Request.size();
+    for (int i = 0; i < sl; i++) {
+        Box(x, y + (i * h), w, h, b_color, Request[i],m); // i = 0 => x,y, i = 1: x,y+2
         if (i != 0) {
             gotoXY(x, y + (i * h));
             cout << char(195);

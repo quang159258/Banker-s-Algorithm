@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include"mywindow.h"
+#include<fstream>
 #define v std::vector
 #define pause system("pause")
 #define cls system("cls")
@@ -235,6 +236,8 @@ public:
 	{
 		v<int>List;
 		int Finish;
+		if (Need.empty())
+			Cal_Need();
 		if (Is_A_Smaller_Equal_B(Request, Need[id]))
 		{
 			if (Is_A_Smaller_Equal_B(Request, Avail))
@@ -347,9 +350,10 @@ public:
 		}
 		for (int i = 0; i < number_request; i++) // Nếu có Request sẵn nxm thì add thêm id vào thành nx(m+1)
 		{
-			id.push_back(i);
-			Request[i].push_back(i);
+			id.push_back(Request[i][m]);
 		}
+
+		
 		while (!Is_AllProcess_Finish(Finish))// Hoàn thành tất cả tiến trình
 		{
 			int flag_Event = false;
@@ -443,5 +447,9 @@ public:
 			}
 		}
 		Print_String_Of_Safety(List);
+	}
+	void Readfile(string a)
+	{
+
 	}
 };
