@@ -329,6 +329,17 @@ void n_Box_divide_E(int x, int y, int w, int h, int b_color, v<v<int>>Request,in
         }
     }
 }
+int Cal(int y, int yptr, int h)
+{
+    int R = (yptr - y) / h;
+    return R;
+}int MaxLengthString(string nd[], int sl)
+{
+    int R = nd[0].length();
+    for (int i = 1; i < sl; i++)
+        R = R <= nd[i].length() ? nd[i].length() : R;
+    return R;
+}
 void n_Box_NoBorder(int x, int y, int w, int h, int b_color, string nd[], int sl)
 {
 
