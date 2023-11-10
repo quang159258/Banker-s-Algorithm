@@ -274,13 +274,16 @@ public:
 		return 1;
 	}
 
-	int DetectDeadLock(v<int>& List)
+	int DetectDeadLock(v<int>& List)//Lưu ý, Request = Need trong thuật toán này
 	{
 		List.clear();
 		if (Allocation.empty() || Avail.empty())
 			return false;
 		if (Request.empty())
-			Request.assign(n, v<int>(m, 0));
+		{
+			Cal_Need();
+			Request = Need;
+		}
 		Work = Avail;
 		Finish.assign(n, false);
 		int flag = false;
@@ -427,8 +430,6 @@ public:
 				return;
 			}
 
-
-
 			for (int i = 0; i < n; i++)//Thuật toán Safety
 			{
 				if (Finish[i])
@@ -443,11 +444,6 @@ public:
 					Finish[i] = true;
 					Allocation[i] = v<int>(m, 0);
 					std::cout << "\tProcess " << i << " da xong\n";
-					std::cout << "Avail\n";
-					Print(Avail, m);
-					std::cout << "Allocation\n";
-					Print(Allocation, n,m);
-					_getch();
 					break;
 				}
 			}
