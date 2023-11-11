@@ -1,9 +1,6 @@
 ﻿#pragma once
 #include"mywindow.h"
 #include<fstream>
-#define v std::vector
-#define pause system("pause")
-#define cls system("cls")
 class Banker
 {
 private:
@@ -42,6 +39,7 @@ public:
 			Work[i] = Work[i] + Allocation[j][i];
 		}
 	}
+
 	void Cal_Max()
 	{
 		Max.resize(n, v<int>(m, 0));
@@ -96,14 +94,6 @@ public:
 			A[i] = A[i] + B[i];
 		}
 	}
-
-	int isDigit(std::string a)
-	{
-		for (char c : a)
-			if (!isdigit(c))
-				return false;
-		return true;
-	}
 	void Nhap_Request(v<int>& id, v<bool>Finish)
 	{
 		v<int>R;
@@ -123,7 +113,6 @@ public:
 					break;
 				}
 		}
-
 		for (int i = number_request; i < number_request + size; i++)
 		{
 			while (1)
@@ -381,14 +370,14 @@ public:
 				Nhap_Request(id, Finish);
 				number_request = Request.size();
 			}
-			for (int i = 0; i < Request.size(); i++)
+			for (int i = 0; i < number_request; i++)
 			{
 				int result = Resource_Request(id[i], Request[i]); // kiểm tra xem request được nhận không
 				if (result == 1)//chấp nhận - đã cập nhật
 				{
 					std::cout << "\t\tRequest cua Process " << id[i] << " duoc phep\n";
 					id.erase(id.begin() + i);
-					Request.erase(Request.begin() + i);
+					Request.erase(Request.begin() + i); number_request--;
 					i--;
 				}
 				else if (result == -1) // từ chối
@@ -396,7 +385,7 @@ public:
 					std::cout << "\t\tRequest cua Process " << id[i] << " se gay deadlock\n";
 					std::cout << "\t\tTien hanh block Request cua " << "Process " << id[i] << "\n";
 					id.erase(id.begin() + i);
-					Request.erase(Request.begin() + i);
+					Request.erase(Request.begin() + i); number_request--;
 					i--;
 				}
 				else //request sẽ chờ
