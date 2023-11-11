@@ -14,11 +14,11 @@
 #define cls system("cls")
 int main()
 {
-    v<int> Avail = { 3,3,2 };
+    v<int> Avail = { 2,3,0};
     v<v<int>> Allocation = 
     {
         {0,1,0},
-        {2,0,0},
+        {3,0,2},
         {3,0,2},
         {2,1,1},
         {0,0,2}
@@ -31,7 +31,8 @@ int main()
         {2,2,2},
         {4,3,3}
     };
-    v<v<int>> Request = { {1,0,2,1} };
+    v<v<int>> Request = {{3,3,0,4},{0,2,0,0},{0,2,1,3}
+    };
     v<v<int>> Need;
 	string nd[7] = { "1. Nhap File","2. Nhap thu cong","3. Check thong tin","4. Kiem tra an toan","5. Kiem tra DEADLOCK","6. Mo phong Banker","0. Dung chuong trinh" };
 	int sl = 7;
@@ -41,6 +42,8 @@ int main()
 	int xptr = x, yptr = y;
 	int xpre = xptr, ypre = yptr;
 	int b_color = 159, b_color_bright = 75;
+    v<int>List;
+    int tmp;
     Banker B = Banker(5, 3, Avail, Allocation, Max, Request, Need);
     Banker C = Banker(5, 3, Avail, Allocation, Max, Request, Need);
 loop:
@@ -103,12 +106,34 @@ loop:
                     case 0:
                         break;
                     case 1:
-                        UI_Nhap(n,m,Avail, Allocation, Max, Request, Need);
+                        UI_Nhap(n, m, Avail, Allocation, Max, Request, Need);
                         B = Banker(n, m, Avail, Allocation, Max, Request, Need);
                         break;
                     case 2:
                         break;
                     case 3:
+                        C = B;
+                        if (C.Safety(List))
+                        {
+                            Box(30, y, 7*List.size(), 3, 159, " ");
+                            gotoXY(32, y + 1);
+                            C.Print_String_Of_Safety(List);
+                        }
+                        else
+                        {
+                            Box(30, y, 50, 3, 159, " ");
+                            gotoXY(32, y + 1);
+                            cout << "Trang thai KHONG AN TOAN UNSAFE!!";
+                        }
+                        _getch();
+                        break;
+                    case 4:
+                        C = B;
+                        tmp = C.DetectDeadLock(List);
+                        Box(30, y, 50, 3, 159, " ");
+                        gotoXY(32, y + 1);
+                        C.Print_String_Of_DeadLock(tmp, List);
+                        _getch();
                         break;
                     case 5:
                         textcolor(7);
@@ -130,6 +155,5 @@ loop:
     }
 	
 	pause;
-	
 	return 0;
 }

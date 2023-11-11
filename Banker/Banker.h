@@ -163,6 +163,7 @@ public:
 		if (result == 1)
 		{
 			std::cout << "Phat hien deadlock!\n";
+			gotoXY(32, 5 + 2);
 			std::cout << "Danh sach tien trinh bi deadlock: ";
 			int size = List.size();
 			for (int i = 0; i < size - 1; i++)
@@ -174,6 +175,7 @@ public:
 		else
 		{
 			std::cout << "Khong\n";
+			gotoXY(32, 5 + 2);
 			Need = Request;
 			if (Safety(List))
 			{
@@ -271,6 +273,15 @@ public:
 		if (Request.empty())
 		{
 			Cal_Need();
+			Request = Need;
+		}
+		else
+		{
+			Cal_Need();
+			for (int i = 0; i < Request.size(); i++)
+			{
+				Plus_Two_Vector(Need[Request[i][m]], Request[i]);
+			}
 			Request = Need;
 		}
 		Work = Avail;
@@ -397,25 +408,10 @@ public:
 
 
 			Banker class_check(Number_UnFinish(Finish), m, Avail, Allocation, Max, Request, Need);//Tạo một class con để check các Tiến trình chưa chạy xong
-			if (!Request.empty())
-				for (int i = 0; i < n; i++)
-				{
-					if (!Finish[i])
-					{
-						class_check.Allocation[tmp] = Allocation[i];
-						class_check.Max[tmp] = Max[i];
-						int k = Find_Index_Of_Id(i, Request);//Dò tìm index của Request chứa Request của Tiến trình i
-						if (k != -1)
-							class_check.Request[tmp] = Request[k];
-						class_check.Need[tmp] = Need[i];
-						tmp++;
-					}
-
-				}
+			
 			if (!class_check.Safety(List_tmp)) //Nếu Unsafe thì có deadlock, ngừng chạy
 			{
 				std::cout << "Da xay ra DEADLOCK\n";
-				_getch();
 				return;
 			}
 
