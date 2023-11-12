@@ -14,24 +14,23 @@
 #define cls system("cls")
 int main()
 {
-    v<int> Avail = { 2,3,0};
+    v<int> Avail = {0,0,0};
     v<v<int>> Allocation = 
     {
         {0,1,0},
-        {3,0,2},
-        {3,0,2},
+        {2,0,0},
+        {3,0,3},
         {2,1,1},
         {0,0,2}
     };
-    v<v<int>> Max = 
+    v<v<int>> Max;
+    v<v<int>> Request = 
     {
-        {7,5,3},
-        {3,2,2},
-        {9,0,2},
-        {2,2,2},
-        {4,3,3}
-    };
-    v<v<int>> Request = {{3,3,0,4},{0,2,0,0},{0,2,1,3}
+        {0,0,0,0},
+        {2,0,2,1},
+        {0,0,1,2},
+        {1,0,0,3},
+        {0,0,2,4}
     };
     v<v<int>> Need;
 	string nd[7] = { "1. Nhap File","2. Nhap thu cong","3. Check thong tin","4. Kiem tra an toan","5. Kiem tra DEADLOCK","6. Mo phong Banker","0. Dung chuong trinh" };
@@ -137,9 +136,20 @@ loop:
                         break;
                     case 5:
                         textcolor(7);
-                        cls;
                         C = B;
-                       C.AddRequest();
+                        tmp = C.DetectDeadLock(List);
+                        C = B;
+                        if(!tmp)
+                        {
+                            cls;
+                            C.AddRequest();
+                        }
+                        else
+                        {
+                            Box(30, y, 50, 3, 159, " ");
+                            gotoXY(32, y + 1);
+                            cout << "Cac Tien Trinh dang DEADLOCK!!";
+                        }
                         _getch();
                         break;
                     default:

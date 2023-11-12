@@ -162,9 +162,9 @@ public:
 	{
 		if (result == 1)
 		{
-			std::cout << "Phat hien deadlock!\n";
+			std::cout << "Phat hien DEADLOCK!\n";
 			gotoXY(32, 5 + 2);
-			std::cout << "Danh sach tien trinh bi deadlock: ";
+			std::cout << "Danh sach tien trinh bi DEADLOCK: ";
 			int size = List.size();
 			for (int i = 0; i < size - 1; i++)
 			{
@@ -174,7 +174,7 @@ public:
 		}
 		else
 		{
-			std::cout << "Khong\n";
+			std::cout << "Khong bi DEADLOCK\n";
 			gotoXY(32, 5 + 2);
 			Need = Request;
 			if (Safety(List))
@@ -272,11 +272,19 @@ public:
 			return false;
 		if (Request.empty())
 		{
+			if (Max.empty())
+			{
+				Max = Allocation;
+			}
 			Cal_Need();
 			Request = Need;
 		}
 		else
 		{
+			if (Max.empty())
+			{
+				Max = Allocation;
+			}
 			Cal_Need();
 			for (int i = 0; i < Request.size(); i++)
 			{
@@ -316,22 +324,7 @@ public:
 		{
 			return true;
 		}
-	}
-	int Number_UnFinish(v<bool>Finish)
-	{
-		int c = 0;
-		for (int i = 0; i < Finish.size(); i++)
-			if (!Finish[i])
-				c++;
-		return c;
-	}
-	int Find_Index_Of_Id(int id, v<v<int>>R)
-	{
-		int i = -1;
-		for (int j = 0; j < R.size(); j++)
-			if (id == R[j][m])
-				return j;
-		return i;
+		else return false;
 	}
 	void AddRequest()
 	{
@@ -405,15 +398,6 @@ public:
 				}
 			}
 			number_request = Request.size();
-
-
-			Banker class_check(Number_UnFinish(Finish), m, Avail, Allocation, Max, Request, Need);//Tạo một class con để check các Tiến trình chưa chạy xong
-			
-			if (!class_check.Safety(List_tmp)) //Nếu Unsafe thì có deadlock, ngừng chạy
-			{
-				std::cout << "Da xay ra DEADLOCK\n";
-				return;
-			}
 
 			for (int i = 0; i < n; i++)//Thuật toán Safety
 			{

@@ -8,9 +8,6 @@ Q:\WordSpace\learnC\Banker\Banker\UI.h(196,43): warning C4018: '<=': signed/unsi
 Q:\WordSpace\learnC\Banker\Banker\UI.h(252,43): warning C4018: '<=': signed/unsigned mismatch
 Q:\WordSpace\learnC\Banker\Banker\UI.h(276,47): warning C4018: '<=': signed/unsigned mismatch
 Q:\WordSpace\learnC\Banker\Banker\UI.h(66,9): warning C4101: 'n_i': unreferenced local variable
-Q:\WordSpace\learnC\Banker\Banker\Banker.h(261,21): warning C4018: '<': signed/unsigned mismatch
-Q:\WordSpace\learnC\Banker\Banker\Banker.h(280,22): warning C4018: '<': signed/unsigned mismatch
-Q:\WordSpace\learnC\Banker\Banker\Banker.h(322,21): warning C4018: '<': signed/unsigned mismatch
-Q:\WordSpace\learnC\Banker\Banker\Banker.h(330,21): warning C4018: '<': signed/unsigned mismatch
-Q:\WordSpace\learnC\Banker\Banker\Banker.h(318): warning C4715: 'Banker::DetectDeadLock': not all control paths return a value
+Q:\WordSpace\learnC\Banker\Banker\Banker.h(262,21): warning C4018: '<': signed/unsigned mismatch
+Q:\WordSpace\learnC\Banker\Banker\Banker.h(289,22): warning C4018: '<': signed/unsigned mismatch
   Banker.vcxproj -> Q:\WordSpace\learnC\Banker\Debug\Banker.exe
