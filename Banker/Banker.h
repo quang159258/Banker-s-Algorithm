@@ -272,25 +272,7 @@ public:
 			return false;
 		if (Request.empty())
 		{
-			if (Max.empty())
-			{
-				Max = Allocation;
-			}
-			Cal_Need();
-			Request = Need;
-		}
-		else
-		{
-			if (Max.empty())
-			{
-				Max = Allocation;
-			}
-			Cal_Need();
-			for (int i = 0; i < Request.size(); i++)
-			{
-				Plus_Two_Vector(Need[Request[i][m]], Request[i]);
-			}
-			Request = Need;
+			Request.resize(n, v<int>(m + 1, 0));
 		}
 		Work = Avail;
 		Finish.assign(n, false);
