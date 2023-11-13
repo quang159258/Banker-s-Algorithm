@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 void menu()
 {
@@ -134,42 +134,6 @@ void UI_Nhap(int &n,int &m,v<int>& Avail, v<v<int>>& Allocation, v<v<int>>& Max,
     }
     Box(1, 4, 118, 21, 159, " ");
     gotoXY(x, y - 3);
-    cout << "Nhap Allocation:";
-    xpre = x+5;
-    for (int i = 0; i < n; i++)
-    {
-        xpre = x+5;
-        gotoXY(x+2, y - 1);
-        cout << "Tien trinh " << i;
-        for (int j = 0; j < m; j++)
-        {
-            while (1)
-            {
-                gotoXY(xpre, y+i);
-                getline(cin, n_str);
-                if (n_str != "")
-                {
-                    if (isDigit(n_str))
-                    {
-                        Allocation[i][j] = stoi(n_str);
-                        xpre += n_str.length() + 3;
-                        break;
-                    }
-                    else
-                    {
-                        for (int k = 0; k <= n_str.length(); k++)
-                        {
-                            gotoXY(xpre + k, y+i);
-                            cout << " ";
-                        }
-                    }
-                }
-            }
-        }
-        
-    }
-    Box(1, 4, 118, 21, 159, " ");
-    gotoXY(x, y - 3);
     cout << "Nhap Max:";
     xpre = x + 5;
     for (int i = 0; i < n; i++)
@@ -203,6 +167,43 @@ void UI_Nhap(int &n,int &m,v<int>& Avail, v<v<int>>& Allocation, v<v<int>>& Max,
             }
         }
     }
+    Box(1, 4, 118, 21, 159, " ");
+    gotoXY(x, y - 3);
+    cout << "Nhap Allocation:";
+    xpre = x+5;
+    for (int i = 0; i < n; i++)
+    {
+        xpre = x+5;
+        gotoXY(x+2, y - 1);
+        cout << "Tien trinh " << i;
+        for (int j = 0; j < m; j++)
+        {
+            while (1)
+            {
+                gotoXY(xpre, y+i);
+                getline(cin, n_str);
+                if (n_str != "")
+                {
+                    if (isDigit(n_str)&& stoi(n_str)<=Max[i][j])
+                    {
+                        Allocation[i][j] = stoi(n_str);
+                        xpre += n_str.length() + 3;
+                        break;
+                    }
+                    else
+                    {
+                        for (int k = 0; k <= n_str.length(); k++)
+                        {
+                            gotoXY(xpre + k, y+i);
+                            cout << " ";
+                        }
+                    }
+                }
+            }
+        }
+        
+    }
+    
     Box(1, 4, 118, 21, 159, " ");
     gotoXY(x, y - 3);
     cout << "Ban co muon nhap request khong? ";

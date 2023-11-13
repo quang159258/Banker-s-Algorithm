@@ -4,9 +4,9 @@ Q:\WordSpace\learnC\Banker\Banker\mywindow.h(340,15): warning C4018: '<=': signe
 Q:\WordSpace\learnC\Banker\Banker\mywindow.h(385,14): warning C4267: 'argument': conversion from 'size_t' to 'short', possible loss of data
 Q:\WordSpace\learnC\Banker\Banker\UI.h(126,39): warning C4018: '<=': signed/unsigned mismatch
 Q:\WordSpace\learnC\Banker\Banker\UI.h(160,43): warning C4018: '<=': signed/unsigned mismatch
-Q:\WordSpace\learnC\Banker\Banker\UI.h(196,43): warning C4018: '<=': signed/unsigned mismatch
-Q:\WordSpace\learnC\Banker\Banker\UI.h(252,43): warning C4018: '<=': signed/unsigned mismatch
-Q:\WordSpace\learnC\Banker\Banker\UI.h(276,47): warning C4018: '<=': signed/unsigned mismatch
+Q:\WordSpace\learnC\Banker\Banker\UI.h(195,43): warning C4018: '<=': signed/unsigned mismatch
+Q:\WordSpace\learnC\Banker\Banker\UI.h(253,43): warning C4018: '<=': signed/unsigned mismatch
+Q:\WordSpace\learnC\Banker\Banker\UI.h(277,47): warning C4018: '<=': signed/unsigned mismatch
 Q:\WordSpace\learnC\Banker\Banker\UI.h(66,9): warning C4101: 'n_i': unreferenced local variable
-Q:\WordSpace\learnC\Banker\Banker\Banker.h(262,21): warning C4018: '<': signed/unsigned mismatch
+Q:\WordSpace\learnC\Banker\Banker\Banker.h(273,21): warning C4018: '<': signed/unsigned mismatch
   Banker.vcxproj -> Q:\WordSpace\learnC\Banker\Debug\Banker.exe

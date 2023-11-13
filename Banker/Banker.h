@@ -1,6 +1,17 @@
 ﻿#pragma once
 #include"mywindow.h"
 #include<fstream>
+bool negNo(int n) {
+	return (n < 0);
+}
+
+bool checkNegNo(int n) {
+	if (negNo(n)) {
+		cout << "Day la so am";
+		return true;
+	}
+	return false;
+}
 class Banker
 {
 private:
@@ -265,7 +276,7 @@ public:
 		return 1;
 	}
 
-	int DetectDeadLock(v<int>& List)//Lưu ý, Request = Need trong thuật toán này
+	int DetectDeadLock(v<int>& List)
 	{
 		List.clear();
 		if (Allocation.empty() || Avail.empty())
@@ -401,26 +412,245 @@ public:
 		}
 		Print_String_Of_Safety(List);
 	}
-	void Readfile(string a)
+	bool readSafety(string address)
+	{
+		ifstream safety(address);
+		if (!safety.is_open()) {
+			cout << "File loi";
+			return false;
+		}
+		safety >> n;
+		safety >> m;
+		Avail.clear();
+		Avail.resize(m, 0);
+		Allocation.clear();
+		Allocation.resize(n, v<int>(m, 0));
+		Max.clear();
+		Request.clear();
+		v<int>requestTmp = v<int>(n, -1);
+		string check;
+		string trash;
+		do {
+			int flag;
+			getline(safety, trash);
+			getline(safety, check, '\n');
+			if (!check.compare("Avail:")) flag = 1;
+			else if (!check.compare("Max:")) flag = 2;
+			else if (!check.compare("Allo:")) flag = 3;
+			else if (!check.compare("Request:")) flag = 4;
+			else flag = 0;
+			
+			int tmp;
+			switch (flag) {
+			case 1:
+				for (int j = 0; j < m; j++) {
+					safety >> tmp;
+					if (checkNegNo(tmp) == true)
+						return false;
+					Avail[j] = tmp;
+				}
+				break;
+			case 2:
+				Max.resize(n, v<int>(m, 0));
+				for (int i = 0; i < n; i++) {
+					for (int j = 0; j < m; j++) {
+						safety >> tmp;
+						if (checkNegNo(tmp) == true)
+							return false;
+						Max[i][j] = tmp;
+					}
+				}
+				break;
+			case 3:
+				for (int i = 0; i < n; i++) {
+					for (int j = 0; j < m; j++) {
+						safety >> tmp;
+						if (checkNegNo(tmp) == true)
+							return false;
+						if (!Max.empty())
+						{
+							if (tmp > Max[i][j] ) {
+								cout << "Du lieu sai!";
+								return false;
+							}
+						}
+						Allocation[i][j] = tmp;
+					}
+				}
+				if(Max.empty())
+				Max = Allocation;
+				break;
+			case 4:
+			{
+				Request.resize(n, v<int>(m + 1, 0));
+				for (int i = 0; i < n; i++) {
+					for (int j = 0; j <= m; j++) {
+						safety >> tmp;
+						if (checkNegNo(tmp) == true)
+							return false;
+						if (j == m) {
+							if (tmp >= n) {
+								cout << "Luong proccess vuot qua muc cho phep!";
+								return false;
+							}
+						}
+						Request[i][j] = tmp;
+					}
+				}
+				break;
+			}
+			default:
+				cout << "Du lieu khong dung hoac khong co du lieu!";
+				return false;
+			}
+		} while (!safety.eof());
+		return true;
+	}
+	void UI_add_File(string address[], int sl)
 	{
 
-	}
-	void Print(v<v<int>>a,int n,int m)
-	{
-		for (int i = 0; i < n; i++)
+		Box(1, 4, 118, 21, 159, " ");
+		int x = 3, y = 5;
+		int h = 1;
+		int xptr = x, yptr = y;
+		int xpre = xptr, ypre = yptr;
+		int b_color = 159;
+		int checkLuaChon = 1;
+		for (int i = 0; i < sl; i++)
 		{
-			for (int j = 0; j < m; j++)
-				std::cout << a[i][j] << " ";
-			std::cout << "\n";
+			gotoXY(x + 2, y + i);
+			cout << address[i];
+		}
+		gotoXY(x + 2, y + sl);
+		cout << "Tro ve";
+		ShowCur(0);
+		while (1)
+		{
+			if (checkLuaChon)
+			{
+				gotoXY(xpre, ypre);
+				cout << " ";
+				xpre = xptr;
+				ypre = yptr;
+				gotoXY(xptr, yptr);
+				cout << ">";
+				checkLuaChon = false;
+			}
+			if (_kbhit())
+			{
+				char c = _getch();
+				if (c == -32)
+				{
+
+					c = _getch();
+					if (c == 72)
+					{
+						checkLuaChon = true; // đã bấm
+						if (yptr != y)
+							yptr -= h;
+						else
+						{
+							yptr = y + h * (sl);
+						}
+					}
+					else if (c == 80)
+					{
+						checkLuaChon = true; // đã bấm
+						if (yptr != y + h * (sl))
+							yptr += h;
+						else
+						{
+							yptr = y;
+						}
+					}
+				}
+				else if (c == 13)
+				{
+					if (yptr - y == sl)
+					{
+						return;
+					}
+					else
+					{
+						int choice = yptr - y;
+						readSafety(address[choice]);
+						break;
+					}
+				}
+			}
 		}
 	}
-	void Print(v<int>a, int n)
+	void Print_One_Process(int id)
 	{
-		for (int i = 0; i < n; i++)
+		int x = 50, y = 8;
+		int i;
+		gotoXY(x, y++);
+		cout << "Avail: ";
+		for (i = 0; i < m; i++)
+			cout << Avail[i] << " ";
+		gotoXY(x, y++);
+		cout << "Tien trinh P"<<id<<": ";
+		gotoXY(x, y++);
+		cout << "Max cua P" << id << ": ";
+		for (i = 0; i < m; i++)
+			cout << Max[id][i] << " ";
+		gotoXY(x, y++);
+		cout << "Allocation cua P" << id << ": ";
+		for (i = 0; i < m; i++)
+			cout << Allocation[id][i] << " ";
+		gotoXY(x, y++);
+		gotoXY(x, y++);
+		cout << "Nhan -> hoac <-  de xem cac tien trinh khac";
+		gotoXY(x, y++);
+		cout << "Nhan ENTER de tiep tuc";
+	}
+	void DanhSachProcess()
+	{
+		Box_E(35, 0, 50, 2, 159, "DANH SACH TIEN TRINH");
+		int x = 3, y = 5;
+		int CurPage = 0;
+		int Nextpage = false;
+		int Prepage = false;
+		int checkUI = true;
+		while (1)
 		{
-				std::cout << a[i] << " ";
-			
+			if (checkUI)
+			{
+				Print_One_Process(CurPage);
+				checkUI = false;
+			}
+			if (Nextpage)
+			{
+				CurPage++;
+				Nextpage = false;
+				checkUI = true;
+			}
+			if (Prepage)
+			{
+				CurPage--;
+				Prepage = false;
+				checkUI = true;
+			}
+
+			if (_kbhit())
+			{
+				char c = _getch();
+				if (c == -32)
+				{
+
+					c = _getch();
+					if (c == 75)
+					{
+						if (CurPage >0)
+							Prepage = true;
+					}
+					if (c == 77)
+					{
+						if (CurPage < n-1)
+							Nextpage = true;
+					}
+				}
+			}
 		}
-		std::cout << "\n";
 	}
 };

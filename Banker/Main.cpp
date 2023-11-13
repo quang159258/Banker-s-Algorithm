@@ -35,6 +35,7 @@ int main()
     v<v<int>> Need;
 	string nd[7] = { "1. Nhap File","2. Nhap thu cong","3. Check thong tin","4. Kiem tra an toan","5. Kiem tra DEADLOCK","6. Mo phong Banker","0. Dung chuong trinh" };
 	int sl = 7;
+    string file[3] = { "Safety.txt","Deadlock1.txt","Deadlock2.txt" };
     int n, m;
 	int h = 2, w = MaxLengthString(nd, sl) + 2;
 	int x = 3, y = 5;
@@ -103,12 +104,14 @@ loop:
                     switch (choice)
                     {
                     case 0:
+                        B.UI_add_File(file, 3);
                         break;
                     case 1:
                         UI_Nhap(n, m, Avail, Allocation, Max, Request, Need);
                         B = Banker(n, m, Avail, Allocation, Max, Request, Need);
                         break;
                     case 2:
+                        B.DanhSachProcess();
                         break;
                     case 3:
                         C = B;
