@@ -14,51 +14,69 @@
 #define cls system("cls")
 int main()
 {
-    v<int> Avail = {0,0,0};
-    v<v<int>> Allocation = 
-    {
-        {0,1,0},
-        {2,0,0},
-        {3,0,3},
-        {2,1,1},
-        {0,0,2}
-    };
+    ShowCur(0);
+    v<int> Avail;
+    v<v<int>> Allocation;
     v<v<int>> Max;
-    v<v<int>> Request = 
-    {
-        {0,0,0,0},
-        {2,0,2,1},
-        {0,0,0,2},
-        {1,0,0,3},
-        {0,0,2,4}
-    };
+    v<v<int>> Request;
     v<v<int>> Need;
-	string nd[7] = { "1. Nhap File","2. Nhap thu cong","3. Check thong tin","4. Kiem tra an toan","5. Kiem tra DEADLOCK","6. Mo phong Banker","0. Dung chuong trinh" };
-	int sl = 7;
+	string nd[6] = { "1. Nhap File","2. Nhap thu cong","3. Kiem tra an toan","4. Kiem tra DEADLOCK","5. Mo phong Banker","0. Dung chuong trinh" };
+	int sl = 6;
     string file[3] = { "Safety.txt","Deadlock1.txt","Deadlock2.txt" };
-    int n, m;
 	int h = 2, w = MaxLengthString(nd, sl) + 2;
 	int x = 3, y = 5;
 	int xptr = x, yptr = y;
+    int n, m;
 	int xpre = xptr, ypre = yptr;
 	int b_color = 159, b_color_bright = 75;
     v<int>List;
     int tmp;
-    Banker B = Banker(5, 3, Avail, Allocation, Max, Request, Need);
-    Banker C = Banker(5, 3, Avail, Allocation, Max, Request, Need);
+    Banker B = Banker(1, 1, Avail, Allocation, Max, Request, Need);
+    Banker C = Banker(1, 1, Avail, Allocation, Max, Request, Need);
+    int CheckEmpty = true;
+    int CurPage = 0;
+    int Nextpage = false;
+    int Prepage = false;
+    
 loop:
+    int checkUI = true;
     textcolor(7);
     cls;
     ShowCur(0);
 	xptr = x, yptr = y;
 	xpre = xptr, ypre = yptr;
 	int checkLuaChon = 1;
+    
 	ShowCur(0);
 	Box(1, 4, 118, 21, b_color, " ");
 	Box_E(45, 0, 31, 2, b_color, "Thuat Toan Banker's");
 	n_Box_divide(x, y, w, h, b_color, nd, sl);
     while (1)
     {
+        if (checkUI)
+        {
+            if (!CheckEmpty)
+            {
+                B.Print_One_Process(CurPage);
+                checkUI = false;
+            }
+        }
+        if (Nextpage)
+        {
+            CurPage++;
+            if (CurPage >= B.GetN())
+                CurPage = 0;
+            Nextpage = false;
+            checkUI = true;
+        }
+        if (Prepage)
+        {
+            CurPage--;
+            if (CurPage <= -1)
+                CurPage = B.GetN() - 1;
+            Prepage = false;
+            checkUI = true;
+        }
         if (checkLuaChon)
         {
             gotoXY(xpre, ypre);
@@ -95,6 +113,14 @@ loop:
                         yptr = y;
                     }
                 }
+                else if (c == 75&&!CheckEmpty)
+                {
+                    Prepage = true;
+                }
+                else if (c == 77 && !CheckEmpty)
+                {
+                    Nextpage = true;
+                }
             }
             else if (c == 13)
             {
@@ -104,16 +130,14 @@ loop:
                     switch (choice)
                     {
                     case 0:
-                        B.UI_add_File(file, 3);
+                        CheckEmpty = !(B.UI_add_File(file, 3));
                         break;
                     case 1:
                         UI_Nhap(n, m, Avail, Allocation, Max, Request, Need);
                         B = Banker(n, m, Avail, Allocation, Max, Request, Need);
+                        CheckEmpty = false;
                         break;
                     case 2:
-                        B.DanhSachProcess();
-                        break;
-                    case 3:
                         C = B;
                         if (C.Safety(List))
                         {
@@ -129,7 +153,7 @@ loop:
                         }
                         _getch();
                         break;
-                    case 4:
+                    case 3:
                         C = B;
                         tmp = C.DetectDeadLock(List);
                         Box(30, y, 50, 3, 159, " ");
@@ -137,7 +161,7 @@ loop:
                         C.Print_String_Of_DeadLock(tmp, List);
                         _getch();
                         break;
-                    case 5:
+                    case 4:
                         textcolor(7);
                         C = B;
                         tmp = C.DetectDeadLock(List);
@@ -167,6 +191,5 @@ loop:
         }
     }
 	
-	pause;
 	return 0;
 }

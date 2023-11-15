@@ -478,7 +478,7 @@ public:
 					}
 				}
 				if(Max.empty())
-				Max = Allocation;
+				Max.resize( n,v<int>(m,10));
 				break;
 			case 4:
 			{
@@ -506,7 +506,7 @@ public:
 		} while (!safety.eof());
 		return true;
 	}
-	void UI_add_File(string address[], int sl)
+	bool UI_add_File(string address[], int sl)
 	{
 
 		Box(1, 4, 118, 21, 159, " ");
@@ -568,20 +568,22 @@ public:
 				{
 					if (yptr - y == sl)
 					{
-						return;
+						return 0;
 					}
 					else
 					{
 						int choice = yptr - y;
-						readSafety(address[choice]);
+						return readSafety(address[choice]);
 						break;
 					}
 				}
 			}
 		}
+		return 0;
 	}
 	void Print_One_Process(int id)
 	{
+		textcolor(159);
 		int x = 50, y = 8;
 		int i;
 		gotoXY(x, y++);
@@ -601,56 +603,7 @@ public:
 		gotoXY(x, y++);
 		gotoXY(x, y++);
 		cout << "Nhan -> hoac <-  de xem cac tien trinh khac";
-		gotoXY(x, y++);
-		cout << "Nhan ENTER de tiep tuc";
 	}
-	void DanhSachProcess()
-	{
-		Box_E(35, 0, 50, 2, 159, "DANH SACH TIEN TRINH");
-		int x = 3, y = 5;
-		int CurPage = 0;
-		int Nextpage = false;
-		int Prepage = false;
-		int checkUI = true;
-		while (1)
-		{
-			if (checkUI)
-			{
-				Print_One_Process(CurPage);
-				checkUI = false;
-			}
-			if (Nextpage)
-			{
-				CurPage++;
-				Nextpage = false;
-				checkUI = true;
-			}
-			if (Prepage)
-			{
-				CurPage--;
-				Prepage = false;
-				checkUI = true;
-			}
-
-			if (_kbhit())
-			{
-				char c = _getch();
-				if (c == -32)
-				{
-
-					c = _getch();
-					if (c == 75)
-					{
-						if (CurPage >0)
-							Prepage = true;
-					}
-					if (c == 77)
-					{
-						if (CurPage < n-1)
-							Nextpage = true;
-					}
-				}
-			}
-		}
-	}
+	int GetN(){ return n; }
+	int GetM() { return m; }
 };
