@@ -1,13 +1,13 @@
-﻿#include<iostream>
+﻿
+#include<iostream>
 #include<vector>
 #include"SFML/Window.hpp"
 #include<conio.h>
-#include<string>
 #include<thread>
 #include"mywindow.h"
 #include"UI.h"
 #include"Banker.h"
-
+#include"SFML.h"
 
 #define v std::vector
 #define pause system("pause")
@@ -138,46 +138,55 @@ loop:
                         CheckEmpty = false;
                         break;
                     case 2:
-                        C = B;
-                        if (C.Safety(List))
+                        if (!CheckEmpty)
                         {
-                            Box(30, y, 7*List.size(), 3, 159, " ");
-                            gotoXY(32, y + 1);
-                            C.Print_String_Of_Safety(List);
+                            C = B;
+                            if (C.Safety(List))
+                            {
+                                Box(30, y, 7 * List.size(), 3, 159, " ");
+                                gotoXY(32, y + 1);
+                                C.Print_String_Of_Safety(List);
+                            }
+                            else
+                            {
+                                Box(30, y, 50, 3, 159, " ");
+                                gotoXY(32, y + 1);
+                                cout << "Trang thai KHONG AN TOAN UNSAFE!!";
+                            }
+                            _getch();
                         }
-                        else
-                        {
-                            Box(30, y, 50, 3, 159, " ");
-                            gotoXY(32, y + 1);
-                            cout << "Trang thai KHONG AN TOAN UNSAFE!!";
-                        }
-                        _getch();
                         break;
                     case 3:
-                        C = B;
-                        tmp = C.DetectDeadLock(List);
-                        Box(30, y, 50, 3, 159, " ");
-                        gotoXY(32, y + 1);
-                        C.Print_String_Of_DeadLock(tmp, List);
-                        _getch();
-                        break;
-                    case 4:
-                        textcolor(7);
-                        C = B;
-                        tmp = C.DetectDeadLock(List);
-                        C = B;
-                        if(!tmp)
+                        if (!CheckEmpty)
                         {
-                            cls;
-                            C.AddRequest();
-                        }
-                        else
-                        {
+                            C = B;
+                            tmp = C.DetectDeadLock(List);
                             Box(30, y, 50, 3, 159, " ");
                             gotoXY(32, y + 1);
-                            cout << "Cac Tien Trinh dang DEADLOCK!!";
+                            C.Print_String_Of_DeadLock(tmp, List);
+                            _getch();
                         }
-                        _getch();
+                        break;
+                    case 4:
+                        if (!CheckEmpty)
+                        {
+                            textcolor(7);
+                            C = B;
+                            tmp = C.DetectDeadLock(List);
+                            C = B;
+                            if (!tmp)
+                            {
+                                cls;
+                                C.AddRequest();
+                            }
+                            else
+                            {
+                                Box(30, y, 50, 3, 159, " ");
+                                gotoXY(32, y + 1);
+                                cout << "Cac Tien Trinh dang DEADLOCK!!";
+                            }
+                            _getch();
+                        }
                         break;
                     default:
                         break;

@@ -1,5 +1,7 @@
 ﻿#pragma once
 #include"SFML/Graphics.hpp"
+#include<algorithm>
+#include"SFML.h"
 void menu()
 {
 	sf::Window window;
@@ -291,16 +293,3 @@ void UI_Nhap(int &n,int &m,v<int>& Avail, v<v<int>>& Allocation, v<v<int>>& Max,
     Cal_Need(n,m,Need,Max, Allocation);
 }
 
-//void DrawProcess(v<bool>Finish)
-//{
-//    int x = 50;
-//    int y = 30;
-//    for (int i = 0; i < Finish.size(); i++)
-//    {
-//        if (!Finish[i])
-//        {
-//            Draw(x, y, id); // id là i
-//            y += 20;
-//        }
-//    }
-//}

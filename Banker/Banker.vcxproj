@@ -144,6 +144,7 @@
   <ItemGroup>
     <ClInclude Include="Banker.h" />
     <ClInclude Include="mywindow.h" />
+    <ClInclude Include="SFML.h" />
     <ClInclude Include="UI.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
