@@ -313,11 +313,7 @@ public:
 				List.push_back(i);
 			}
 		}
-		if (flag)
-		{
-			return true;
-		}
-		else return false;
+		return flag;
 	}
 	void AddRequest()
 	{
@@ -333,9 +329,7 @@ public:
 
 		v<bool>Finish(n, false);
 		v<int>List;
-		v<int>List_tmp;
 		v<int>id;
-		int tmp;
 		char key;
 		int number_request = Request.size();
 		if (Need.empty())
@@ -369,7 +363,6 @@ public:
 			DrawRequest(&window, x - 350, y, id, R);
 			DrawProcess(&window, x, y, Finish, P);
 			int flag_Event = false;
-			tmp = 0;
 			std::cout << "Nhan Enter de nhap trong vong 3 giay !!" << std::endl;
 			for (int i = 0; i < 3; i++)
 			{
