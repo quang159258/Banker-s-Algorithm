@@ -318,14 +318,15 @@ public:
 	void AddRequest()
 	{
 		sf::RenderWindow window(sf::VideoMode(1280, 640), "My Bank");
-		sf::RectangleShape Background(sf::Vector2f(window.getSize().x, window.getSize().y));
-		int x = window.getSize().x*80/100, y = window.getSize().y * 30 / 100;
+		sf::RectangleShape Background(sf::Vector2f(1280, 640));
 		Background.setFillColor(sf::Color::White);
-		float speed = 15;
+		int x = window.getSize().x * 80 / 100, y = window.getSize().y * 30 / 100;
+		float speed = 30;
 		v<Process>P;
 		v<Rq>R;
 		Process tmpp;
 		Rq tmppp;
+
 
 		v<bool>Finish(n, false);
 		v<int>List;
@@ -352,19 +353,16 @@ public:
 		
 		while (!Is_AllProcess_Finish(Finish))// Hoàn thành tất cả tiến trình
 		{
+			
 			window.display();
 			std::this_thread::sleep_for(std::chrono::seconds(1));
 			window.clear();
-			window.draw(Background);
-			DrawRequest(&window, x - 350, y, id, R);
-			DrawProcess(&window, x, y, Finish, P);
+			DrawPaR(window, P, R, id, Finish, Background);
 			window.display();
-			window.draw(Background);
-			DrawRequest(&window, x - 350, y, id, R);
-			DrawProcess(&window, x, y, Finish, P);
+			DrawPaR(window, P, R, id, Finish, Background);
 			int flag_Event = false;
-			std::cout << "Nhan Enter de nhap trong vong 3 giay !!" << std::endl;
-			for (int i = 0; i < 3; i++)
+			std::cout << "Nhan Enter de nhap trong vong 2 giay !!" << std::endl;
+			for (int i = 0; i < 2; i++)
 			{
 				std::this_thread::sleep_for(std::chrono::seconds(1));
 
@@ -383,34 +381,21 @@ public:
 				Nhap_Request(id, Finish);
 				number_request = Request.size();
 				window.clear();
-				window.draw(Background);
-				DrawRequest(&window, x - 350, y, id, R);
-				DrawProcess(&window, x, y, Finish, P);
+				DrawPaR(window, P, R, id, Finish, Background);
 				window.display();
 			}
 			for (int i = 0; i < number_request; i++)
 			{
 				window.display();
-				std::this_thread::sleep_for(std::chrono::seconds(1));
-				window.draw(Background);
-				DrawRequest(&window, x - 350, y, id, R);
-				DrawProcess(&window, x, y, Finish, P);
+				std::this_thread::sleep_for(std::chrono::milliseconds(700));
+				DrawPaR(window, P, R, id, Finish, Background); 
 				window.display();
-				window.draw(Background);
-				DrawRequest(&window, x - 350, y, id, R);
-				DrawProcess(&window, x, y, Finish, P);
+				DrawPaR(window, P, R, id, Finish, Background);
 				int result = Resource_Request(id[i], Request[i]); // kiểm tra xem request được nhận không
 				if (result == 1)//chấp nhận - đã cập nhật
 				{
 					std::cout << "\t\tRequest cua Process " << id[i] << " duoc phep\n";
-					R[i].SetInfor(&window, sf::Color::Blue);
-					while (R[i].x <= P[id[i]].x)
-					{
-						R[i].SetInfor(&window, sf::Color::Blue);
-						window.display();
-						R[i].x += speed;
-						R[i].y = Cal_Y(R[i].x, R[i].Shape, P[id[i]].Shape);
-					}
+					R[i].move(window, sf::Color::Blue, P[id[i]], speed);
 					id.erase(id.begin() + i);
 					Request.erase(Request.begin() + i); number_request--;
 					i--;
@@ -431,10 +416,8 @@ public:
 			}
 			number_request = Request.size();
 			window.display();
-			window.draw(Background);
-			DrawRequest(&window, x - 350, y, id, R);
-			DrawProcess(&window, x, y, Finish, P);
-			std::this_thread::sleep_for(std::chrono::seconds(1));
+			DrawPaR(window, P, R, id, Finish, Background);
+			std::this_thread::sleep_for(std::chrono::milliseconds(700));
 			for (int i = 0; i < n; i++)//Thuật toán Safety
 			{
 				if (Finish[i])
@@ -456,9 +439,7 @@ public:
 			}
 		}
 		Print_String_Of_Safety(List);
-		window.draw(Background);
-		DrawRequest(&window, x - 350, y, id, R);
-		DrawProcess(&window, x, y, Finish, P);
+		DrawPaR(window, P, R, id, Finish, Background);
 		window.display();
 		_getch();
 		window.close();

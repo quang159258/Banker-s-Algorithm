@@ -2,29 +2,30 @@
 Q:\WordSpace\learnC\Banker\Banker\mywindow.h(227,14): warning C4267: 'argument': conversion from 'size_t' to 'short', possible loss of data
 Q:\WordSpace\learnC\Banker\Banker\mywindow.h(340,15): warning C4018: '<=': signed/unsigned mismatch
 Q:\WordSpace\learnC\Banker\Banker\mywindow.h(385,14): warning C4267: 'argument': conversion from 'size_t' to 'short', possible loss of data
-Q:\WordSpace\learnC\Banker\Banker\SFML.h(19,43): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+Q:\WordSpace\learnC\Banker\Banker\SFML.h(23,43): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
           with
           [
               T=float
           ]
-Q:\WordSpace\learnC\Banker\Banker\SFML.h(19,40): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+Q:\WordSpace\learnC\Banker\Banker\SFML.h(23,40): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
           with
           [
               T=float
           ]
-Q:\WordSpace\learnC\Banker\Banker\SFML.h(39,23): warning C4018: '<': signed/unsigned mismatch
-Q:\WordSpace\learnC\Banker\Banker\SFML.h(66,43): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+Q:\WordSpace\learnC\Banker\Banker\SFML.h(43,23): warning C4018: '<': signed/unsigned mismatch
+Q:\WordSpace\learnC\Banker\Banker\SFML.h(55,130): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+Q:\WordSpace\learnC\Banker\Banker\SFML.h(74,43): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
           with
           [
               T=float
           ]
-Q:\WordSpace\learnC\Banker\Banker\SFML.h(66,40): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+Q:\WordSpace\learnC\Banker\Banker\SFML.h(74,40): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
           with
           [
               T=float
           ]
-Q:\WordSpace\learnC\Banker\Banker\SFML.h(86,23): warning C4018: '<': signed/unsigned mismatch
-Q:\WordSpace\learnC\Banker\Banker\SFML.h(96,125): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+Q:\WordSpace\learnC\Banker\Banker\SFML.h(97,22): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+Q:\WordSpace\learnC\Banker\Banker\SFML.h(105,23): warning C4018: '<': signed/unsigned mismatch
 Q:\WordSpace\learnC\Banker\Banker\UI.h(128,39): warning C4018: '<=': signed/unsigned mismatch
 Q:\WordSpace\learnC\Banker\Banker\UI.h(162,43): warning C4018: '<=': signed/unsigned mismatch
 Q:\WordSpace\learnC\Banker\Banker\UI.h(197,43): warning C4018: '<=': signed/unsigned mismatch
@@ -32,24 +33,5 @@ Q:\WordSpace\learnC\Banker\Banker\UI.h(255,43): warning C4018: '<=': signed/unsi
 Q:\WordSpace\learnC\Banker\Banker\UI.h(279,47): warning C4018: '<=': signed/unsigned mismatch
 Q:\WordSpace\learnC\Banker\Banker\UI.h(68,9): warning C4101: 'n_i': unreferenced local variable
 Q:\WordSpace\learnC\Banker\Banker\Banker.h(273,21): warning C4018: '<': signed/unsigned mismatch
-Q:\WordSpace\learnC\Banker\Banker\Banker.h(321,82): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
-          with
-          [
-              T=unsigned int
-          ]
-          and
-          [
-              T=float
-          ]
-Q:\WordSpace\learnC\Banker\Banker\Banker.h(321,62): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
-          with
-          [
-              T=unsigned int
-          ]
-          and
-          [
-              T=float
-          ]
-Q:\WordSpace\learnC\Banker\Banker\Banker.h(411,17): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
-Q:\WordSpace\learnC\Banker\Banker\Banker.h(412,21): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+Q:\WordSpace\learnC\Banker\Banker\Banker.h(398,51): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
   Banker.vcxproj -> Q:\WordSpace\learnC\Banker\Debug\Banker.exe

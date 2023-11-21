@@ -1,4 +1,8 @@
 #pragma once
+#define MAX_OBJECTS 5
+#define MAX_PROPERTIES 4
+#define MAX_THREAD 8 
+#define v std::vector
 struct Process
 {
 	int x;
@@ -46,6 +50,10 @@ void DrawProcess(sf::RenderWindow *window, int x, int y, v<bool>Finish,v<Process
         }
     }
 }
+float Cal_Y(int x, const sf::CircleShape& A, const sf::RectangleShape& B)
+{
+    return (-(A.getPosition().y - B.getPosition().y) * 1.00 * (x - A.getPosition().x) / (B.getPosition().x - A.getPosition().x)) + A.getPosition().y;
+}
 struct Rq
 {
     int x;
@@ -78,6 +86,17 @@ struct Rq
         window->draw(Shape);
         window->draw(text);
     }
+    void move(sf::RenderWindow& window, sf::Color color,Process P,int speed)
+    {
+        SetInfor(&window,color);
+        while (x <= P.x)
+        {
+            SetInfor(&window, color);
+            window.display();
+            x += speed;
+            y = Cal_Y(x, Shape, P.Shape);
+        }
+    }
 };
 void DrawRequest(sf::RenderWindow* window, int x, int y, v <int>id, v<Rq>& R)
 {
@@ -91,7 +110,10 @@ void DrawRequest(sf::RenderWindow* window, int x, int y, v <int>id, v<Rq>& R)
 
     }
 }
-float Cal_Y(int x, const sf::CircleShape& A, const sf::RectangleShape& B)
+void DrawPaR(sf::RenderWindow& window, v<Process>&P, v<Rq>&R, v<int>id, v<bool>Finish,sf::RectangleShape Background)
 {
-	return (-(A.getPosition().y - B.getPosition().y)*1.00 * (x - A.getPosition().x) / (B.getPosition().x - A.getPosition().x)) + A.getPosition().y;
+    int x = window.getSize().x * 80 / 100, y = window.getSize().y * 30 / 100;
+    window.draw(Background);
+    DrawRequest(&window, x - 700, y, id, R);
+    DrawProcess(&window, x, y, Finish, P);
 }
